@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular6-start": {
+    "cryptoxrates": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,14 +13,15 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular6-start",
+            "outputPath": "dist/cryptoxrates",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.json"
             ],
             "styles": [
               "src/styles.css"
@@ -43,25 +44,26 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true
+              "buildOptimizer": true,
+              "serviceWorker": true
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular6-start:build"
+            "browserTarget": "cryptoxrates:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular6-start:build:production"
+              "browserTarget": "cryptoxrates:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular6-start:build"
+            "browserTarget": "cryptoxrates:build"
           }
         },
         "test": {
@@ -77,7 +79,8 @@
             "scripts": [],
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.json"
             ]
           }
         },
@@ -95,7 +98,7 @@
         }
       }
     },
-    "angular6-start-e2e": {
+    "cryptoxrates-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -103,7 +106,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "angular6-start:serve"
+            "devServerTarget": "cryptoxrates:serve"
           }
         },
         "lint": {
@@ -118,5 +121,5 @@
       }
     }
   },
-  "defaultProject": "angular6-start"
+  "defaultProject": "cryptoxrates"
 }
