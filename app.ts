@@ -24,7 +24,7 @@ class App {
   }
 
   private config(): void {
-    this.app.use(cors(options));
+    this.app.use(cors(options))
     this.app.use(logger('dev'))
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: false }))
@@ -51,7 +51,7 @@ class App {
     })
 
     this.app.use('/', router)
-    this.app.options("*", cors(options));
+    this.app.options("*", cors(options))
   }
 }
 

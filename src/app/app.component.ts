@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { environment } from '../environments/environment';
+import { environment } from '../environments/environment'
 
 let API_URL = '/api'
 if (!environment.production) {

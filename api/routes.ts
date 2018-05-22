@@ -11,7 +11,7 @@ router.get('/cryptoData', (req: Request, res: Response) => {
 })
 
 router.get('/', function(req: Request, res: Response, next: NextFunction) {
-    res.send('Express RESTful API');
-});
+    res.send('Express RESTful API')
+})
 
 export default router
