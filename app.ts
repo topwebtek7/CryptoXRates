@@ -4,7 +4,16 @@ import * as createError from 'http-errors'
 import * as path from 'path'
 import * as favicon from 'serve-favicon'
 import * as logger from 'morgan'
+import * as cors from "cors"
 import apiRouter from './api/index'
+
+const options:cors.CorsOptions = {
+  allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "X-Access-Token"],
+  credentials: true,
+  methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
+  // origin: API_URL,
+  preflightContinue: false
+}
 
 class App {
   public app: express.Application
@@ -15,6 +24,7 @@ class App {
   }
 
   private config(): void {
+    this.app.use(cors(options));
     this.app.use(logger('dev'))
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: false }))
@@ -41,6 +51,7 @@ class App {
     })
 
     this.app.use('/', router)
+    this.app.options("*", cors(options));
   }
 }
 
