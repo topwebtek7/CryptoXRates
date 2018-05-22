@@ -1,3 +1,3 @@
-const router = require('./routes')
+import routes from './routes'
 
-module.exports = router;
+export default routes

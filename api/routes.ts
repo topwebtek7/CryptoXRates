@@ -1,14 +1,17 @@
 import * as express from 'express'
+import { Request, Response, NextFunction } from "express"
 const router = express.Router()
 
-const CryptoXRates = require('./cryptoXRatesClass')
+import CryptoXRates from './cryptoXRatesClass'
 
-const newCryptoXRates = new CryptoXRates()
-
-router.get('/cryptoData', (req, res) => {
-    newCryptoXRates.rateList()
+router.get('/cryptoData', (req: Request, res: Response) => {
+    CryptoXRates.rateList()
         .then(data => res.status(200).send(data))
         .catch(err => res.status(400).send(JSON.parse(err)))
 })
 
-module.exports = router
+router.get('/', function(req: Request, res: Response, next: NextFunction) {
+    res.send('Express RESTful API');
+});
+
+export default router

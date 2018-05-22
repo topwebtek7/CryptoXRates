@@ -1,22 +1,22 @@
 "use strict"
-const axios = require('axios')
+import axios from 'axios'
 
 class CryptoXRates {
   private apiUrl
   private _limit
-  
+
   constructor() {
     this.apiUrl = 'https://api.coinmarketcap.com/v2'
     this._limit = null
   }
-  set limit(limit) {
+  set limit(limit: number) {
     this._limit = limit
   }
   get limit() {
     return this._limit
   }
   
-  availableCrytos() {
+  public availableCrytos(): Promise<any> {
     return new Promise((resolve, reject) => {
       axios.get(`${this.apiUrl}/listings`)
       .then(function (response) {
@@ -32,7 +32,7 @@ class CryptoXRates {
     })
   }
 
-  rateList() {
+  public rateList(): Promise<any> {
     return new Promise((resolve, reject) => {
       axios.get(`${this.apiUrl}/ticker${this._limit ? `/?limit=${this._limit}` : ''}`)
       .then(function (response) {
@@ -60,7 +60,7 @@ class CryptoXRates {
     })
   }
 
-  getRate(id) {
+  public getRate(id: Number): Promise<any> {
     return new Promise((resolve, reject) => {
       axios.get(`${this.apiUrl}/ticker/${id}/`)
       .then(function (response) {
@@ -76,7 +76,7 @@ class CryptoXRates {
     })
   }
 
-  global() {
+  public global(): Promise<any> {
     return new Promise((resolve, reject) => {
       axios.get(`${this.apiUrl}/global/`)
       .then(function (response) {
@@ -93,4 +93,4 @@ class CryptoXRates {
   }
 }
 
-module.exports = CryptoXRates
+export default new CryptoXRates()

@@ -1,33 +1,47 @@
-var createError = require('http-errors')
 import * as express from 'express'
-var path = require('path')
-var favicon = require('serve-favicon')
-var logger = require('morgan')
-var apiRouter = require('./api/index')
+import { Request, Response, NextFunction } from "express"
+import * as createError from 'http-errors'
+import * as path from 'path'
+import * as favicon from 'serve-favicon'
+import * as logger from 'morgan'
+import apiRouter from './api/index'
 
-var app = express()
+class App {
+  public app: express.Application
+  constructor() {
+    this.app = express()
+    this.config()
+    this.routes()
+  }
 
-app.use(logger('dev'))
-app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
-app.use(express.static(path.join(__dirname, '../cryptoxrates')))
-app.use('/', express.static(path.join(__dirname, '../cryptoxrates')))
-app.use('/api', apiRouter)
+  private config(): void {
+    this.app.use(logger('dev'))
+    this.app.use(express.json())
+    this.app.use(express.urlencoded({ extended: false }))
+    this.app.use(express.static(path.join(__dirname, '../cryptoxrates')))
+    this.app.use('/', express.static(path.join(__dirname, '../cryptoxrates')))
+  }
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404))
-})
+  private routes(): void {
+    const router = express.Router()
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message
-  res.locals.error = req.app.get('env') === 'development' ? err : {}
+    this.app.use('/api', apiRouter)
+    
+    router.use(function(req: Request, res: Response, next: NextFunction) {
+      next(createError(404))
+    })
+    // error handler
+    router.use(function(err, req: Request, res: Response, next: NextFunction) {
+      // set locals, only providing error in development
+      res.locals.message = err.message
+      res.locals.error = req.app.get('env') === 'development' ? err : {}
+    
+      // render the error page
+      res.sendStatus(err.status || 500)
+    })
 
-  // render the error page
-  res.status(err.status || 500)
-  res.send(err.status)
-})
+    this.app.use('/', router)
+  }
+}
 
-module.exports = app
+export default new App().app
