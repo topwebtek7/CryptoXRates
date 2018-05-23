@@ -1,19 +1,19 @@
 import * as express from 'express'
-import { Request, Response, NextFunction } from "express"
+import { Request, Response, NextFunction } from 'express'
 import * as createError from 'http-errors'
 import * as path from 'path'
 import * as favicon from 'serve-favicon'
 import * as logger from 'morgan'
-import * as cors from "cors"
+import * as cors from 'cors'
 import apiRouter from './api/index'
 import * as YAML from 'yamljs'
 const swaggerUi = require('swagger-ui-express')
 const swaggerDocument = YAML.load('./doc/api.yaml')
 
-const options:cors.CorsOptions = {
-  allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "X-Access-Token"],
+const options: cors.CorsOptions = {
+  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'X-Access-Token'],
   credentials: true,
-  methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
+  methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
   // origin: API_URL,
   preflightContinue: false
 }
@@ -40,7 +40,7 @@ class App {
 
     this.app.use('/api', apiRouter)
     this.app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-    
+
     router.use(function(req: Request, res: Response, next: NextFunction) {
       next(createError(404))
     })
@@ -49,13 +49,12 @@ class App {
       // set locals, only providing error in development
       res.locals.message = err.message
       res.locals.error = req.app.get('env') === 'development' ? err : {}
-    
       // render the error page
       res.sendStatus(err.status || 500)
     })
 
     this.app.use('/', router)
-    this.app.options("*", cors(options))
+    this.app.options('*', cors(options))
   }
 }
 
