@@ -38,7 +38,7 @@ class App {
   private routes(): void {
     const router = express.Router()
 
-    this.app.use('/api', apiRouter)
+    this.app.use('/api/v1', apiRouter)
     this.app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
     router.use(function(req: Request, res: Response, next: NextFunction) {

@@ -1,5 +1,5 @@
 info:
-  title: test
+  title: Crypto Exchange Rates
   version: 1.0.0
 consumes:
   - application/json
@@ -16,40 +16,33 @@ securityDefinitions:
 security: []
 
 paths:
-  /api/v1/clusters/:
+  /api/v1/cryptoData/:
     get:
-      operationId: ListClusters
-      summary: List available clusters
+      operationId: ListCryptoCurrencies
+      summary: List available CryptoCurrencies
       responses:
         200:
           description: OK
           schema:
             type: array
             items:
-              $ref: '#/definitions/Cluster'
-      security:
-        - keystone: []
-    post:
-      operationId: CreateCluster
-      summary: Create a cluster
-      responses:
-        200:
-          description: OK
-          schema:
-            $ref: '#/definitions/Cluster'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/Cluster'
+              $ref: '#/definitions/CryptoCurrency'
       security:
         - keystone: []
 
 definitions:
-  Cluster:
+  CryptoCurrency:
     type: object
     properties:
       name:
-        description: name of the cluster
+        description: name of the CryptoCurrency
+        type: string
+      symbol:
+        description: symbol of the CryptoCurrency
+        type: string
+      usd:
+        description: price, market_cap, percent_change of the CryptoCurrency(USD)
+        type: object
+      last_updated:
+        description: Last updated datetime(UNIX timestamp)
         type: string

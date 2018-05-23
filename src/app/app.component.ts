@@ -3,7 +3,7 @@ import { environment } from '../environments/environment'
 
 let API_URL = '/api'
 if (!environment.production) {
-  API_URL = 'http://127.0.0.1:4040/api'
+  API_URL = 'http://127.0.0.1:4040/api/v1'
 }
 interface OnDestroy {
   ngOnDestroy(): void
@@ -15,12 +15,12 @@ interface OnDestroy {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnDestroy {
-  title: string = 'CryptoCurrencies Exchange Rates'
-  loading: boolean = false
+  title = 'CryptoCurrencies Exchange Rates'
+  loading = false
   data: any = null
   interval: any
 
-  constructor(){
+  constructor() {
     this.tick = this.tick.bind(this)
     this.interval = setInterval(this.tick, 60000)
 
@@ -36,7 +36,7 @@ export class AppComponent implements OnDestroy {
         this.loading = false
       })
   }
-  
+
   ngOnDestroy() {
     clearInterval(this.interval)
   }
