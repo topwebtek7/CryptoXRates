@@ -34,6 +34,8 @@
     "nodemon": "^1.17.4",
     "rxjs": "^6.0.0",
     "serve-favicon": "^2.5.0",
+    "swagger-ui-express": "^3.0.9",
+    "yamljs": "^0.3.0",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
@@ -49,10 +51,11 @@
     "@types/morgan": "^1.7.35",
     "@types/node": "~8.9.4",
     "@types/serve-favicon": "^2.2.30",
+    "@types/yamljs": "^0.2.30",
     "codelyzer": "~4.2.1",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
-    "karma": "~1.7.1",
+    "karma": "^2.0.2",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "~1.4.2",
     "karma-jasmine": "~1.1.1",

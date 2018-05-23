@@ -6,6 +6,9 @@ import * as favicon from 'serve-favicon'
 import * as logger from 'morgan'
 import * as cors from "cors"
 import apiRouter from './api/index'
+import * as YAML from 'yamljs'
+const swaggerUi = require('swagger-ui-express')
+const swaggerDocument = YAML.load('./doc/api.yaml')
 
 const options:cors.CorsOptions = {
   allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "X-Access-Token"],
@@ -36,6 +39,7 @@ class App {
     const router = express.Router()
 
     this.app.use('/api', apiRouter)
+    this.app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
     
     router.use(function(req: Request, res: Response, next: NextFunction) {
       next(createError(404))
