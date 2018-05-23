@@ -3,7 +3,10 @@
 ## Development server
 
 Run `npm run dev` for a dev server. Navigate to `http://localhost:3000/`. The app will automatically reload if you change any of the source files.
-Api is running on `http://localhost:4040/`
+
+API v1 is running on `http://localhost:4040/`
+
+API doc url -- `http://localhost:4040/doc`
 
 ## Code scaffolding
 
