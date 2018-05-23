@@ -1,4 +1,4 @@
-"use strict"
+'use strict'
 import axios from 'axios'
 
 class CryptoXRates {
@@ -15,7 +15,7 @@ class CryptoXRates {
   get limit() {
     return this._limit
   }
-  
+
   public availableCrytos(): Promise<any> {
     return new Promise((resolve, reject) => {
       axios.get(`${this.apiUrl}/listings`)
@@ -39,7 +39,7 @@ class CryptoXRates {
         if (response && response.data) {
           const data = response.data.data || response.data
           const newArray = []
-          for (var k in data) {
+          for (const k in data) {
               if (data.hasOwnProperty(k)) {
                 newArray.push({
                   name: data[k]['name'],
